@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StudyOS — Student Operating System</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- ============ LOGIN ============ -->
+<div id="loginScreen">
+  <div class="login-card">
+    <div class="login-logo">OS</div>
+    <h1>Welcome to StudyOS</h1>
+    <p>Your student operating system</p>
+    <div class="login-field">
+      <label>Name</label>
+      <input id="loginName" type="text" placeholder="e.g. Priya Verma" autocomplete="off">
+    </div>
+    <div class="login-field">
+      <label>Student ID / Email</label>
+      <input id="loginEmail" type="text" placeholder="you@school.edu" autocomplete="off">
+    </div>
+    <button class="login-btn" onclick="login()">Log in to Desktop →</button>
+    <div class="login-hint" id="loginHint">Your data is saved in this browser only.</div>
+    <div class="login-reset" id="loginResetWrap" style="display:none;margin-top:8px;">
+      <button class="login-reset-btn" onclick="resetAllData()">Clear saved data &amp; start fresh</button>
+    </div>
+  </div>
+</div>
+
+<!-- ============ DESKTOP ============ -->
+<div id="desktop">
+  <div class="icon-grid" id="iconGrid"></div>
+</div>
+
+<!-- ============ TASKBAR ============ -->
+<div id="taskbar" style="display:none;">
+  <button class="start-btn" onclick="toggleSearch()">
+    <span class="start-orb">⌘</span> StudyOS
+  </button>
+  <div id="taskbarApps"></div>
+  <div class="tb-right">
+    <button class="tb-pill" onclick="toggleSearch()">🔍 Search</button>
+    <button class="tb-pill" onclick="toggleNotif()">🔔<span class="tb-badge" id="notifBadge">0</span></button>
+    <div class="tb-pill" id="clockPill">
+      <div id="clockTime">--:--</div>
+      <div class="d" id="clockDate">---</div>
+    </div>
+    <button class="tb-pill profile-pill" onclick="openWindow('dashboard')"><span class="av" id="avatarInitial">A</span> <span id="profileName">Aarav</span></button>
+  </div>
+</div>
+
+<!-- ============ SEARCH OVERLAY ============ -->
+<div id="searchOverlay" onclick="if(event.target===this)toggleSearch()">
+  <div id="searchBox">
+    <div id="searchInputWrap">
+      <span>🔍</span>
+      <input id="searchInput" placeholder="Search tasks, notes, goals, subjects..." oninput="runSearch()">
+    </div>
+    <div id="searchResults"></div>
+  </div>
+</div>
+
+<!-- ============ NOTIFICATIONS ============ -->
+<div id="notifPanel">
+  <h3>Notifications</h3>
+  <div id="notifList"></div>
+</div>
+
+<!-- ============ WINDOWS CONTAINER ============ -->
+<div id="windowsLayer"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
