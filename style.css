@@ -339,3 +339,12 @@ input,textarea,select{font-family:inherit;}
   .notes-sidebar{width:100%;display:flex;gap:6px;overflow-x:auto;}
   .win{width:94vw !important;left:3vw !important;min-width:unset;}
 }
+/* UI improvement for StudyOS */
+button {
+    transition: transform 0.2s ease;
+}
+
+button:hover {
+    transform: translateY(-2px);
+}
+
