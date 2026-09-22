@@ -69,3 +69,18 @@ Status
 ⬜ Docker Compose setup
 ⬜ Kubernetes manifests
 ⬜ Prometheus monitoring integration
+
+## project goal
+Project Goal
+
+The primary goal of this project is to take a complete, working front-end application (StudyOS) and apply modern DevOps practices to its build, testing, and deployment lifecycle — demonstrating the full journey from source code to a monitored, containerized, production-style deployment.
+
+Specifically, this project aims to:
+
+Automate the build and release process using Git/GitHub as the source of truth and GitHub Actions for continuous integration on every push.
+Containerize the application with Docker so it runs identically across local, staging, and production environments.
+Establish a CI/CD pipeline using Jenkins to automate build, test, and deployment stages end-to-end.
+Enable reproducible local orchestration with Docker Compose for multi-service/local development parity.
+Deploy at scale using Kubernetes, simulating a real-world production deployment with services, pods, and scaling.
+Monitor application health using Prometheus to collect and expose metrics from the running deployment.
+Apply DevOps principles — version control discipline, infrastructure as code, automation over manual steps, and continuous feedback loops — to a real project rather than a toy example.
