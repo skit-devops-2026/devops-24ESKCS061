@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  studyos:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: devops-24eskcs061:latest
+    container_name: studyos-app
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - NODE_ENV=production
+    healthcheck:
+      test: ["CMD", "node", "-e", "require('http').get('http://localhost:3000/health', (res) => process.exit(res.statusCode === 200 ? 0 : 1))"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
+    networks:
+      - studyos-network
+
+  prometheus:
+    image: prom/prometheus:v2.51.0
+    container_name: studyos-prometheus
+    restart: unless-stopped
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+    depends_on:
+      studyos:
+        condition: service_healthy
+    networks:
+      - studyos-network
+
+  grafana:
+    image: grafana/grafana:10.4.0
+    container_name: studyos-grafana
+    restart: unless-stopped
+    ports:
+      - "3001:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    volumes:
+      - ./monitoring/grafana/dashboards:/var/lib/grafana/dashboards:ro
+    depends_on:
+      - prometheus
+    networks:
+      - studyos-network
+
+networks:
+  studyos-network:
+    driver: bridge
