@@ -1,20 +1,44 @@
-# StudyOS — DevOps Practices & Principles Project
+# StudyOS
 
-## Project Description
+## Author
+
+| Roll No. | Name | GitHub username |
+|---|---|---|
+| 24ESKCS061 | Aryaman Kumar | Aryamansam |
+
+## About
+
 StudyOS is a browser-based "student operating system" — a full-stack front-end web application that brings together task management, notes, a timetable, goal tracking, analytics, a Pomodoro-style focus timer, gamification, and an expense tracker inside a single OS-style desktop interface with draggable, minimizable windows and a taskbar.
 
 This repository is also used as the subject of a DevOps Practices and Principles course project: the goal is to take an existing static web app and wrap it in a full CI/CD and containerized deployment pipeline.
 
-## Technologies Used
-- HTML5
-- CSS3 (custom properties / design tokens, responsive layout)
-- Vanilla JavaScript (no frameworks — DOM-driven state management)
-- Node.js & Express (production server with `/health` and Prometheus metrics)
-- `prom-client` (Prometheus metrics collector)
-- `localStorage` for client-side persistence
-- Docker & Docker Compose
-- Kubernetes
-- Prometheus & Grafana
+## Tech stack
+
+- Frontend: HTML5, CSS3, JavaScript
+- Backend: Node.js, Express
+- Monitoring: Prometheus, Grafana
+- Containerization: Docker, Docker Compose
+- Container Registry: GitHub Container Registry (GHCR)
+- Orchestration: Kubernetes
+- CI/CD: GitHub Actions, Jenkins
+
+## Running locally
+
+```bash
+npm install
+npm test
+npm start
+```
+
+## Live URL
+
+https://devops-24eskcs061.onrender.com
+
+## Health endpoint
+
+`GET /health` returns HTTP 200 with `{ "status": "ok" }`.
+
+---
 
 ## Project Features
 - **Student Desktop** — OS-style dashboard with app icons, taskbar, clock, notifications, and draggable/minimizable/closable windows
@@ -124,15 +148,6 @@ devops-24ESKCS061/
 ## Project Goal
 The primary goal of this project is to take a complete, working front-end application (StudyOS) and apply modern DevOps practices to its build, testing, and deployment lifecycle — demonstrating the full journey from source code to a monitored, containerized, production-style deployment.
 
-Specifically, this project aims to:
-- Automate the build and release process using Git/GitHub as the source of truth and GitHub Actions for continuous integration on every push.
-- Containerize the application with Docker so it runs identically across local, staging, and production environments.
-- Establish a CI/CD pipeline using Jenkins to automate build, test, and deployment stages end-to-end.
-- Enable reproducible local orchestration with Docker Compose for multi-service/local development parity.
-- Deploy at scale using Kubernetes, simulating a real-world production deployment with services, pods, and scaling.
-- Monitor application health using Prometheus to collect and expose metrics from the running deployment.
-- Apply DevOps principles — version control discipline, infrastructure as code, automation over manual steps, and continuous feedback loops — to a real project rather than a toy example.
-
 ---
 
 # MT2 — Containerization, Deployment, Monitoring & Kubernetes
@@ -144,7 +159,7 @@ Specifically, this project aims to:
 | **M5 — Containerization** | 1. Dockerfile present | 2/2 | ✅ Completed |
 | | 2. docker-compose.yml present | 2/2 | ✅ Completed |
 | | 3. Docker image pushed to container registry | 2/2 | ✅ Completed (`ghcr.io/skit-devops-2026/devops-24eskcs061:latest`) |
-| **M6 — Deployment & Monitoring** | 4. Live URL responding | 2/2 | ✅ Configured & verified via healthcheck |
+| **M6 — Deployment & Monitoring** | 4. Live URL responding | 2/2 | ✅ Configured (`https://devops-24eskcs061.onrender.com`) |
 | | 5. Prometheus config present | 2/2 | ✅ Completed (`monitoring/prometheus.yml`) |
 | | 6. Monitoring dashboard committed under `monitoring/` | 2/2 | ✅ Completed (`monitoring/grafana/dashboards/studyos-dashboard.json`) |
 | | 7. Deployment screenshot committed under `docs/` | 2/2 | ✅ Completed (`docs/deployment-screenshot.png`) |
@@ -193,10 +208,11 @@ docker run -p 3000:3000 ghcr.io/skit-devops-2026/devops-24eskcs061:latest
 ```
 
 ### 5. Live Deployment
-The application is pre-configured for cloud container deployment via:
-- **Render**: `render.yaml` infrastructure-as-code blueprint
+The application is deployed and configured for cloud container hosting via:
+- **Live URL**: https://devops-24eskcs061.onrender.com
+- **Health Check**: https://devops-24eskcs061.onrender.com/health
+- **Render Blueprint**: `render.yaml` infrastructure-as-code
 - **Railway**: `railway.json` configuration
-- Default listening port: `process.env.PORT || 3000`
 
 ### 6. Health Endpoint (`GET /health`)
 The `/health` endpoint returns HTTP 200 with JSON payload:
